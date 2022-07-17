@@ -1,6 +1,7 @@
 all:
 	clang-format -i *.c
 	gcc -g -F DWARF loader.c -o loader.bin
-	nasm test.asm -o test.bin
+	nasm breakpoint.asm -o breakpoint.bin
+	./loader.bin ./breakpoint.bin
 clean:
 	rm -vf *.bin
