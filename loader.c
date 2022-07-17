@@ -30,12 +30,15 @@ int main(int argc, char **argv) {
   }
 
   // Load file into memory and execute it directly
+  printf("[+] Mapping shellcode into memory\n");
   void (*shellcode)() =
       mmap(NULL, st.st_size, PROT_READ | PROT_EXEC, MAP_PRIVATE, fileno(fd), 0);
   if (shellcode == MAP_FAILED) {
     perror("mmap");
     exit(EXIT_FAILURE);
   }
+
+  printf("[+] Executing shellcode\n");
   shellcode();
 
   fclose(fd);
